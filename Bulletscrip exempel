@@ -1,0 +1,39 @@
+using UnityEngine;
+
+public class BulletScript : MonoBehaviour
+{
+    public float speed = 10f; // Adjust this value to control the bullet's speed
+
+    void Update()
+    {
+        Vector3 movement = transform.forward * speed * Time.deltaTime;
+        GetComponent<Rigidbody>().velocity = movement;
+    }
+}
+
+
+using UnityEngine;
+
+public class RaycastExample : MonoBehaviour
+{
+    Camera mainCamera;
+    public GameObject bulletPrefab; // Assign your bullet prefab in the Inspector
+
+    void Start()
+    {
+        mainCamera = Camera.main;
+    }
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0)) // Left mouse button click
+        {
+            // Create a bullet at the camera's position and rotation
+            GameObject bullet = Instantiate(bulletPrefab, mainCamera.transform.position, mainCamera.transform.rotation);
+            
+            // Set the bullet's position slightly forward from the camera's center
+            Vector3 offset = mainCamera.transform.forward * 0.5f;
+            bullet.transform.position += offset;
+        }
+    }
+}
