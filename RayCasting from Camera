@@ -1,0 +1,29 @@
+using UnityEngine;
+
+public class RaycastExample : MonoBehaviour
+{
+    Camera mainCamera;
+
+    void Start()
+    {
+        mainCamera = Camera.main;
+    }
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0)) // Left mouse button click
+        {
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hitInfo;
+
+            if (Physics.Raycast(ray, out hitInfo))
+            {
+                // Access the hit object and perform actions
+                GameObject hitObject = hitInfo.collider.gameObject;
+                Debug.Log("Hit object: " + hitObject.name);
+
+                // You can add any other actions or logic based on the hit object
+            }
+        }
+    }
+}
